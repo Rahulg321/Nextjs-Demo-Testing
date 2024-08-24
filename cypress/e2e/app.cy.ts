@@ -7,7 +7,8 @@
 describe("Navigation", () => {
   it("should navigate to the about page", () => {
     // Start from the index page
-    cy.visit("http://localhost:3000");
+    // added a base url to the cypress config
+    cy.visit("/");
 
     // Find a link with an href attribute containing "about" and click it
     cy.get('a[href*="about"]').click();
@@ -17,6 +18,21 @@ describe("Navigation", () => {
 
     // The new page should contain an h1 with "About page"
     cy.get("h1").contains("About Page");
+  });
+
+  it("should navigate to the product page", () => {
+    // Start from the index page
+    // added a base url to the cypress config
+    cy.visit("/");
+
+    // Find a link with an href attribute containing "about" and click it
+    cy.get('a[href*="product"]').click();
+
+    // The new url should include "/about"
+    cy.url().should("include", "/product");
+
+    // The new page should contain an h1 with "About page"
+    cy.get("h1").contains("Product Page");
   });
 });
 
